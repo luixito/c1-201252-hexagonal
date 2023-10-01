@@ -13,21 +13,18 @@ export class deleteBookController {
 
             let deletedBook = await this.deleteBookUseCase.run(uuid)
 
-            if (deletedBook) {
-                return res.status(200).send({
-                    status: "success",
-                    data: {
-                        id: deletedBook,
-                    },
-                    message: "book delete succefuly",
+            if (deletedBook === null) { 
+                return res.status(404).send({
+                    status: "error",
+                    data: [],
+                    message: "No se encontró la review con el UUID ingresado",
                 });
             }
 
-            return res.status(404).send({
-                status: "error",
-                data: [],
-                message: "No se encontró el book con el UUID ingresado",
-            });
+            return res.status(200).send({
+                    status: "success",
+                    message: "book delete succefuly",
+                });
         } catch (error) {
             console.error("Error deleting book:", error);
             return res.status(500).send({

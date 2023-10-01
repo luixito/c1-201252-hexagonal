@@ -2,7 +2,7 @@ import { Book } from "../domain/book";
 import { BookRepository } from "../domain/bookRepository";
 
 export class AddBookUseCase {
-    constructor(readonly BookRepository: BookRepository) {}
+    constructor(readonly BookRepository: BookRepository) { }
 
     async run(
         uuid: string,
@@ -12,11 +12,16 @@ export class AddBookUseCase {
         uniteCode: string,
         loan: boolean,
         status: boolean,
-    ):Promise<Book|null> {
+    ): Promise<Book | null> {
         try {
-            const addBook = await this.BookRepository.addBook(uuid,title,author,description,uniteCode,loan,status);
+            const addBook = await this.BookRepository.addBook(uuid, title, author, description, uniteCode, loan, status);
+
+            if (!title || !author || !description || !uniteCode || !loan || !status) {
+                return null;
+            }
+
             return addBook;
-        }catch(error) {
+        } catch (error) {
             return null;
         }
     }

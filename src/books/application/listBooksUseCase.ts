@@ -7,7 +7,6 @@ export class listBooksUseCase {
     async run(): Promise<Book | Book[] | null> {
         try {
             const listBooks = await this.BookRepository.listBooks();
-
             return listBooks;
         } catch (error) {
             return null;

@@ -30,8 +30,7 @@ export class addBookController {
                 return res.status(201).send({
                     status: "success",
                     data: {
-                        id: createdBook.uuid,
-                        title: createdBook.title
+                        createdBook
                     },
                     message: "Book created succefuly"
                 });
@@ -39,10 +38,7 @@ export class addBookController {
 
             res.status(400).send({
                 status: "error",
-                data: [],
-                //TODO: implementar validaciones
-                validations: [],
-                message: "Error"
+                message: "Asegurese de llenar todos los datos"
             });
         } catch (error) {
             console.error("Error addBook:", error);

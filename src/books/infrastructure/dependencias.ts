@@ -49,6 +49,11 @@ import { updateBookUseCase } from "../application/updateBookUseCase";
 const UpdateBookUseCase = new updateBookUseCase(mysqlbookRepository);
 const UpdateBookController = new updateBookController(UpdateBookUseCase);
 
+import { filterBooksController } from "./controller/filterBooksController";
+import { filterBooksUseCase } from "../application/filterBooksUseCase";
+
+const FilterBooksUseCase = new filterBooksUseCase(mysqlbookRepository);
+const FilterBooksController = new filterBooksController(FilterBooksUseCase);
 
 export {
     AddBookController,
@@ -59,4 +64,5 @@ export {
     ListInactiveBookController,
     LoanBookController,
     UpdateBookController,
+    FilterBooksController
 };

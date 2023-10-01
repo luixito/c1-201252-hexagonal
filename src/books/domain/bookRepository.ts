@@ -25,7 +25,7 @@ export interface BookRepository {
         title?: string,
         author?: string,
         uniteCode?: string
-    ): Promise<Book[] | null>;
+    ): Promise<Book[] | null | string>;
 
     getBookById(uuid: string): Promise<Book | null>;
 
