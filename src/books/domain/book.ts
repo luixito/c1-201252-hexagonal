@@ -5,8 +5,8 @@ export class Book {
         public author: string,
         public description: string,
         public uniteCode: string,
-        public status: boolean,
-        public loan: boolean,
+        public status: string,
+        public loan: string,
     ) { }
 
 }

@@ -3,7 +3,7 @@ import { Book } from "../domain/book";
 import { BookRepository } from "../domain/bookRepository";
 
 export class MysqlBookRepository implements BookRepository {
-    async addBook(uuid: string, title: string, author: string, description: string, uniteCode: string, loan: boolean, status: boolean): Promise<Book | null> {
+    async addBook(uuid: string, title: string, author: string, description: string, uniteCode: string, loan: string, status: string): Promise<Book | null> {
         try {
             let sql = "INSERT INTO book(uuid, title, author, description , uniteCode, loan, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
             const params: any[] = [uuid, title, author, description, uniteCode, loan, status];
@@ -73,9 +73,12 @@ export class MysqlBookRepository implements BookRepository {
         try {
             const sql = "SELECT * FROM book WHERE status = false";
 
-            const [book]: any = await query(sql, []);
+            const [result]: any = await query(sql, []);
+            if (result.length > 0) {
+                return result;
 
-            return book.map((row: any) => new Book(book.uuid, book.title, book.author, book.description, book.uniteCode, book.status, book.loan));
+            }
+            return null;
         } catch (error) {
             return null;
         }
@@ -178,19 +181,20 @@ export class MysqlBookRepository implements BookRepository {
         }
     }
 
-    async loanBook(uuid: string, loan: boolean): Promise<string | null> {
+    async loanBook(uuid: string, loan: string): Promise<Book | null> {
         try {
-            const sql = "UPDATE book SET loan = FALSE WHERE uuid = ?";
+            const sql = "UPDATE book SET loan = ? WHERE uuid = ?";
 
-            const [result]: any = await query(sql, [uuid]);
+            const [result]: any = await query(sql, [loan, uuid]);
 
+            const book = this.getBookById(uuid)
             if (result.affectedRows > 0) {
-                return "book loan successfully";
+                return book;
             } else {
                 return null;
             }
         } catch (error) {
-            console.error("Error loan book:", error);
+            console.error("Error disabling book:", error);
             return null;
         }
     }

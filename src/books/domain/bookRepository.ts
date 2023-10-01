@@ -6,8 +6,8 @@ export interface BookRepository {
         author: string,
         description: string,
         uniteCode: string,
-        loan: boolean,
-        status: boolean,): Promise<Book | null>;
+        loan: string,
+        status: string,): Promise<Book | null>;
 
     updateBook(
         uuid: string,
@@ -33,5 +33,5 @@ export interface BookRepository {
     
     disableBook(uuid: string): Promise<String | null>;
     
-    loanBook(uuid: string, loan:boolean): Promise<string|null>
+    loanBook(uuid: string, loan:string): Promise<Book|null>
 }

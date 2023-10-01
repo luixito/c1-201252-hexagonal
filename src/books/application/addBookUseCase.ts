@@ -10,8 +10,8 @@ export class AddBookUseCase {
         author: string,
         description: string,
         uniteCode: string,
-        loan: boolean,
-        status: boolean,
+        loan: string,
+        status: string,
     ): Promise<Book | null> {
         try {
             const addBook = await this.BookRepository.addBook(uuid, title, author, description, uniteCode, loan, status);

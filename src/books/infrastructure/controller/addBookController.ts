@@ -13,8 +13,8 @@ export class addBookController {
             } = req.body
 
             const newUuid: string = uuid()
-            const status = true
-            const loan = true
+            const status = "1"
+            const loan = "1"
 
             let createdBook = await this.addBookController.run(
                 newUuid,

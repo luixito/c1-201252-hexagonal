@@ -10,6 +10,8 @@ export class updateBookController {
 
             let {
                 uuid,
+            } = req.params
+            let {
                 title,
                 author,
                 description,
@@ -37,9 +39,6 @@ export class updateBookController {
 
             res.status(400).send({
                 status: "error",
-                data: [],
-                //TODO: implementar validaciones
-                validations: [],
                 message: "Error al actualizar el libro"
             });
         } catch (error) {

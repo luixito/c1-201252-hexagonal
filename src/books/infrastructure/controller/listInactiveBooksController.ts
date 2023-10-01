@@ -11,7 +11,7 @@ export class listInactiveBookController {
             if (result) {
                 return res.status(200).send({
                     status: "success",
-                    data: null,
+                    data: result,
                     message: "Libros encontrado exitosamente",
                 });
             }

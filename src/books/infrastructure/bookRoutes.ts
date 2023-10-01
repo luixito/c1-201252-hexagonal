@@ -18,7 +18,7 @@ bookRoutes.delete('/deletebook/:uuid', DeleteBookController.run.bind(DeleteBookC
 bookRoutes.put('/disablebook/:uuid', DisableBookController.run.bind(DisableBookController));
 bookRoutes.get('/getbook/:uuid', GetBookByIdController.run.bind(GetBookByIdController));
 bookRoutes.get('/listbooks', ListBookController.run.bind(ListBookController));
-bookRoutes.get('/listinactive-books', ListInactiveBookController.run.bind(ListInactiveBookController));
-bookRoutes.post('/loanbook', LoanBookController.run.bind(LoanBookController));
+bookRoutes.get('/listinactive/books', ListInactiveBookController.run.bind(ListInactiveBookController));
+bookRoutes.put('/loanbook/:uuid', LoanBookController.run.bind(LoanBookController));
 bookRoutes.put('/updatebook/:uuid', UpdateBookController.run.bind(UpdateBookController));
 bookRoutes.get('/filtro/:uuid/:title/:author/:uniteCode', FilterBooksController.run.bind(FilterBooksController));

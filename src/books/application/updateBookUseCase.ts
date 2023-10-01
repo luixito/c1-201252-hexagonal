@@ -12,8 +12,8 @@ export class updateBookUseCase {
         ): Promise<Book | null> {
         try {
             const updatedBook = await this.BookRepository.getBookById(uuid);
-            if (!updatedBook) {
-                return null;
+            if (updatedBook === null) {
+                return null
             }
 
             const updateBook= await this.BookRepository.updateBook(uuid,title,author,description);
