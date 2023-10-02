@@ -1,7 +1,7 @@
 import { User } from "../domain/user";
 import { userRepository } from "../domain/userRepository";
 
-export class DeleteUserUseCase {
+export class deleteUserUseCase {
     constructor(readonly userRepository: userRepository) { }
 
     async run(uuid: String): Promise<string | null> {

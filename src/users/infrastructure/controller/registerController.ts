@@ -33,19 +33,15 @@ export class RegisterController {
                 return res.status(201).send({
                     status: "success",
                     data: {
-                        id: createdUser.uuid,
-                        title: createdUser.name
+                        createdUser
                     },
-                    message: "El usuario ha sido creado exitosamente"
+                    message: "user created succefuly"
                 });
             }
 
             res.status(400).send({
                 status: "error",
-                data: [],
-                //TODO: implementar validaciones
-                validations: [],
-                message: "Error al crear el usuario"
+                message: "Asegurese de llenar todos los datos"
             });
         } catch (error) {
             return null;

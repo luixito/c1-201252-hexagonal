@@ -8,10 +8,6 @@ export class GetByIdUseCase {
 
         try {
             const getUserById = await this.userRepository.getById(uuid);
-
-            if (!getUserById) {
-                return null;
-            }
             return getUserById;
         } catch (error) {
             return null;

@@ -10,21 +10,18 @@ export class DeleteUserController {
 
             const deletedUserId = await this.deleteUserUseCase.run(uuid);
 
-            if (deletedUserId) {
-                return res.status(200).send({
-                    status: "success",
-                    data: {
-                        id: deletedUserId,
-                    },
-                    message: "El usuario ha sido eliminado exitosamente",
+            if (deletedUserId === null) { 
+                return res.status(404).send({
+                    status: "error",
+                    data: [],
+                    message: "No se encontró la review con el UUID ingresado",
                 });
             }
 
-            return res.status(404).send({
-                status: "error",
-                data: [],
-                message: "No se encontró el usuario con el UUID ingresado",
-            });
+            return res.status(200).send({
+                    status: "success",
+                    message: "book delete succefuly",
+                });
         } catch (error) {
             console.error("Error deleting user:", error);
             return res.status(500).send({

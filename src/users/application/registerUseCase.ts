@@ -2,7 +2,7 @@ import { User } from "../domain/user";
 import { userRepository } from "../domain/userRepository";
 
 export class RegisterUseCase {
-    constructor(readonly userRepository: userRepository) {}
+    constructor(readonly userRepository: userRepository) { }
 
     async run(
         uuid: string,
@@ -12,11 +12,15 @@ export class RegisterUseCase {
         tel: string,
         password: string,
         status: boolean,
-    ):Promise<User|null> {
+    ): Promise<User | null> {
         try {
-            const addUser = await this.userRepository.register(uuid,name,lastName,email,tel,status,password);
+            const addUser = await this.userRepository.register(uuid, name, lastName, email, tel, status, password);
+
+            if (!name || !lastName || !email || !tel || !password) {
+                return null;
+            }
             return addUser;
-        }catch(error) {
+        } catch (error) {
             return null;
         }
     }

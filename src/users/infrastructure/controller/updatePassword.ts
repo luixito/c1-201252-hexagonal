@@ -12,17 +12,18 @@ export class UpdateUserPasswordController {
             const updatedUser = await this.UpdatePasswordUseCase.run(uuid, password);
 
             if (updatedUser) {
-                return res.status(200).send({
+                return res.status(201).send({
                     status: "success",
-                    data: updatedUser,
-                    message: "Contraseña de usuario actualizada exitosamente",
+                    data: {
+                        updatedUser
+                    },
+                    message: "user update succefuly"
                 });
             }
 
-            return res.status(404).send({
+            res.status(400).send({
                 status: "error",
-                data: null,
-                message: "No se encontró el usuario con el UUID ingresado",
+                message: "Asegurese de llenar todos los datos"
             });
         } catch (error) {
             return res.status(500).send({

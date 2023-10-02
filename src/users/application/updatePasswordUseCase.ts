@@ -7,9 +7,13 @@ export class UpdatePasswordUseCase {
     async run(uuid: string, password: string): Promise<User | null> {
 
         try {
-            const allUsers = await this.userRepository.updatePassword(uuid, password);
+            const updatedInfo = await this.userRepository.getById(uuid);
+            if (updatedInfo === null) {
+                return null
+            }
 
-            return allUsers;
+            const updateInfo = await this.userRepository.updatePassword(uuid, password);
+            return updateInfo;
         } catch (error) {
             return null;
         }

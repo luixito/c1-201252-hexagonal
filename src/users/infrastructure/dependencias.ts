@@ -7,11 +7,11 @@ import { RegisterUseCase } from "../application/registerUseCase";
 const registerUseCase = new RegisterUseCase(mysqlUserRepository);
 const registerController = new RegisterController(registerUseCase);
 
-import { AllUsersDisabledUseCase } from "../application/allUsersDisabledUseCase";
-import { GetAllDisabledUsersController } from "./controller/allUsersDisabledController";
+import { allUsersDisabledUseCase } from "../application/allUsersDisabledUseCase";
+import { allDisabledUsersController } from "./controller/allUsersDisabledController";
 
-const allUsersDisabledUseCase = new AllUsersDisabledUseCase(mysqlUserRepository);
-const getAllDisabledUsersController = new GetAllDisabledUsersController(allUsersDisabledUseCase);
+const AllUsersDisabledUseCase = new allUsersDisabledUseCase(mysqlUserRepository);
+const GetAllDisabledUsersController = new allDisabledUsersController(AllUsersDisabledUseCase);
 
 
 import { LoginUserUseCase } from "../application/loginUserUseCase";
@@ -20,11 +20,11 @@ import { LoginController } from "./controller/loginUserController";
 const loginUserUseCase = new LoginUserUseCase(mysqlUserRepository);
 const loginController = new LoginController(loginUserUseCase);
 
-import { DeleteUserUseCase } from "../application/deleteUserUseCase";
+import { deleteUserUseCase } from "../application/deleteUserUseCase";
 import { DeleteUserController } from "./controller/deleteUserController";
 
-const deleteUserUseCase = new DeleteUserUseCase(mysqlUserRepository);
-const deleteUserController = new DeleteUserController(deleteUserUseCase);
+const DeleteUserUseCase = new deleteUserUseCase(mysqlUserRepository);
+const deleteUserController = new DeleteUserController(DeleteUserUseCase);
 
 import { DisableUserUseCase } from "../application/disableUserUseCase";
 import { DisableUserController } from "./controller/disabledUserController";
@@ -60,7 +60,7 @@ const updateUserPasswordController = new UpdateUserPasswordController(updatePass
 export {
     registerController,
     loginController,
-    getAllDisabledUsersController,
+    GetAllDisabledUsersController,
     deleteUserController,
     disabledUserController,
     getAllUsersController,

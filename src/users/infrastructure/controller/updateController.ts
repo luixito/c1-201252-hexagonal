@@ -27,19 +27,15 @@ export class UpadateController {
                 return res.status(201).send({
                     status: "success",
                     data: {
-                        id: updatedUser.uuid,
-                        title: updatedUser.name
+                       updatedUser
                     },
-                    message: "El usuario ha sido actualizado correctamentew"
+                    message: "El Libro ha sido actualizado correctamentew"
                 });
             }
 
             res.status(400).send({
                 status: "error",
-                data: [],
-                //TODO: implementar validaciones
-                validations: [],
-                message: "Error al actualizar el usuario"
+                message: "Error al actualizar el libro"
             });
         } catch (error) {
             return null;

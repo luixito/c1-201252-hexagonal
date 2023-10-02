@@ -13,7 +13,7 @@ export class UpdateUseCase {
         ): Promise<User | null> {
         try {
             const existisUser = await this.userRepository.getById(uuid);
-            if (!existisUser) {
+            if (existisUser === null) {
                 return null;
             }
 

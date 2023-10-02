@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { allUsersDisabledUseCase } from "../../application/allUsersDisabledUseCase"; 
 
-export class GetAllDisabledUsersController {
+export class allDisabledUsersController {
     constructor(private readonly allUsersDisabledUseCase: allUsersDisabledUseCase) {}
 
     async run(req: Request, res: Response) {
@@ -12,19 +12,17 @@ export class GetAllDisabledUsersController {
                 return res.status(200).send({
                     status: "success",
                     data: disabledUsers,
-                    message: "Usuarios inhabilitados recuperados",
+                    message: "usuarios desactivados encontrados",
                 });
             }
 
             return res.status(404).send({
                 status: "error",
-                data: null,
-                message: "No se encontraron usuarios inhabilitados",
+                message: "No se encontró libros",
             });
         } catch (error) {
             return res.status(500).send({
                 status: "error",
-                data: null,
                 message: "Error al recuperar usuarios inhabilitados",
             });
         }

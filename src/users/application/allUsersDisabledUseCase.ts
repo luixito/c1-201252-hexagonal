@@ -1,7 +1,7 @@
 import { User } from "../domain/user";
 import { userRepository } from "../domain/userRepository";
 
-export class AllUsersDisabledUseCase {
+export class allUsersDisabledUseCase {
     constructor(readonly userRepository: userRepository) { }
 
     async run(): Promise<User |User[] | null> {

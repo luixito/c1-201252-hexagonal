@@ -12,14 +12,12 @@ export class DisableUserController {
             if (result) {
                 return res.status(200).send({
                     status: "success",
-                    data: null,
-                    message: "Usuario inhabilitados exitosamente",
+                    message: "usuario inhabilitados exitosamente",
                 });
             }
 
             return res.status(404).send({
                 status: "error",
-                data: null,
                 message: "No se encontró el usuario con el UUID ingresado",
             });
         } catch (error) {

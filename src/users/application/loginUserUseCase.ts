@@ -9,10 +9,8 @@ export class LoginUserUseCase {
         ): Promise<string | null> {
         try {
             const loginUser = await this.userRepository.login(email, password);
-            if (!loginUser) {
-                return null;
-            }
-            return "Usuario logeado correctamente";
+
+            return "Usuario logeado";
         } catch (error) {
             return null;
         }
