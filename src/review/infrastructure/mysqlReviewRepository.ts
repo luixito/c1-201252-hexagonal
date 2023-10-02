@@ -33,6 +33,7 @@ export class MysqlReviewRepository implements ReviewRepository {
             return null;
         }
     }
+
     async getInactiveReview(): Promise<Review | null> {
         try {
             const sql = "SELECT * FROM review WHERE status = false";
@@ -84,22 +85,13 @@ export class MysqlReviewRepository implements ReviewRepository {
 
     async deleteReview(uuid: string, userId: string): Promise<boolean> {
         try {
-            const validationSql = "SELECT userId FROM review WHERE uuid = ?;";
-            const [validationResults]: any = await query(validationSql, [uuid]);
-
-            if (validationResults.length === 0) {
-                throw new Error("No se encontró la review con el UUID proporcionado.");
-            }
-
-            if (validationResults[0].userId !== userId) {
-                return (false)
-            }
-
             const sql = "DELETE FROM review WHERE uuid = ? AND userId = ?;";
             const result: any = await query(sql, [uuid, userId]);
-
-            return true;
-
+            if (result.affectedRows > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (error) {
             return false
         }

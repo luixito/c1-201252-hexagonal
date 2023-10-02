@@ -9,9 +9,8 @@ export class deleteReviewUseCase {
     ): Promise<string | null> {
         try {
             const del = await this.ReviewRepository.deleteReview(uuid, userId);
-
             if (del === null) {
-                return null; 
+                return null;
             }
 
             return "delete";
