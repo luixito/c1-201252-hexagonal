@@ -16,7 +16,7 @@ export class updateReviewController {
                 });
             }
 
-            const updatedReview = await this.updateReviewUseCase.run(uuid, userId ,text);
+            const updatedReview = await this.updateReviewUseCase.run(uuid, userId, text);
 
             if (updatedReview) {
                 return res.status(200).json({
@@ -25,12 +25,12 @@ export class updateReviewController {
                         review: updatedReview,
                     },
                 });
-            } else {
-                return res.status(404).json({
-                    status: "error",
-                    message: "No se encontro review",
-                });
             }
+            return res.status(404).json({
+                status: "error",
+                message: "No se encontro review",
+            });
+
         } catch (error) {
             console.error("Error al actualizar la review:", error);
             return res.status(500).json({

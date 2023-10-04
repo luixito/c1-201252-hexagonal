@@ -100,9 +100,9 @@ export class MysqlReviewRepository implements ReviewRepository {
     async inactivedReview(uuid: string): Promise<string | null> {
         try {
             const sql = "UPDATE review SET status = '0' WHERE uuid = ?";
-            
+
             const [result]: any = await query(sql, [uuid]);
-    
+
             if (result.affectedRows > 0) {
                 return "inactivated";
             } else {
@@ -112,43 +112,30 @@ export class MysqlReviewRepository implements ReviewRepository {
             return null;
         }
     }
-    
+
     async updateReview(uuid: string, userId: string, text: string): Promise<Review | null | string> {
         try {
-            const exist = "SELECT userId FROM review WHERE uuid = ?;";
-            const [result]: any = await query(exist, [uuid]);
-
+            const exist = "SELECT * FROM user WHERE uuid = ?;";
+            const [result]: any = await query(exist, [userId]);
+            console.log('result.length', result.length)
             if (result.length === 0) {
-                throw new Error("No se encontró la review con el UUID proporcionado.");
-            }
-
-            if (result[0].userId !== userId) {
-                return ('unauthorized')
+                return null
             }
 
             if (!text) {
-                throw new Error("No fields to update.");
+                return null
             }
-    
-            const updateFields: string[] = [];
-            const params: any[] = [];
-            
-            if (text) {
-                updateFields.push("text = ?");
-                params.push(text);
-            }
-    
-            params.push(uuid);
-            const sql = `UPDATE review SET ${updateFields.join(", ")} WHERE uuid = ?`;
-    
-            const [update]: any = await query(sql, params);
-    
+
+            const sql = `UPDATE review SET text = ? WHERE uuid = ?`;
+
+            const [update]: any = await query(sql, [uuid]);
+            console.log('update.affectedRows', update.affectedRows)
             if (update.affectedRows > 0) {
                 const updateReview = await this.getReview(uuid);
                 return updateReview;
-            } else {
-                return null;
             }
+            return null;
+
         } catch (error) {
             console.error("Error updating book:", error);
             return null;
