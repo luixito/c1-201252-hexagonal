@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import { bookRoutes } from "./books/infrastructure/bookRoutes";
+import { userRoutes } from "./users/infrastructure/userRoutes";
 
 const app = express();
 
